@@ -73,8 +73,10 @@ role {
 	# Multiplex a single stop() to the sub-roles.
 	method $p->method_stop() => sub {
 		my $self = shift;
-		$self->stop_handle_readable();
-		$self->stop_handle_writable();
+		my $stop_handle_readable = "stop_${h}_readable";
+		my $stop_handle_writable = "stop_${h}_writable";
+		$self->$stop_handle_readable();
+		$self->$stop_handle_writable();
 	};
 
 	method $method_put => sub {
